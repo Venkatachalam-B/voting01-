@@ -65,7 +65,7 @@ app.post("/register",async function(req,res){
     try{
       let queryResult = await User.findOne({email:username});
       console.log(queryResult);
-      if(queryResult==null){
+      if(queryResult===null){
         const newUser=new User({
          email:req.body.username,
          password:req.body.password
@@ -78,6 +78,10 @@ app.post("/register",async function(req,res){
          console.log(err);
        }
       }
+       else if(queryResult.email === username)
+      {
+        res.render("Aaccount")
+      }
 
     }
     catch(err){
@@ -85,10 +89,7 @@ app.post("/register",async function(req,res){
       }
         
         
-      else if(queryResult.email === username)
-      {
-        res.render("Aaccount")
-      }
+     
 
         
     }
