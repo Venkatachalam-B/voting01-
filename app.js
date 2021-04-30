@@ -69,7 +69,7 @@ app.post("/register",async function(req,res){
       {
         res.render("Aaccount")
       }
-      else{
+      else if(queryResult.email==null){
         const newUser=new User({
          email:req.body.username,
          password:req.body.password
