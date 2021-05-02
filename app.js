@@ -60,29 +60,26 @@ app.post("/already",async function fun(req,res){
 
 app.post("/register",async function(req,res){
     const username=req.body.username;
-  const pass=req.body.pass;
-     let queryResult1 = await User.findOne({email:username});
+    const pass=req.body.password;
+    let queryResult1 = await User.findOne({email:username});
     await User.findOne({email:username},async function(err,fo)
     {
       if(fo==null){
           const newUser=new User({
             email:req.body.username,
-            password:req.body.pass
+            password:pass
           });
-          try{
-            await newUser.save();
-             res.render("candidates");
-          }
-          catch(err)
-          {console.log(err);}
+          try{await newUser.save();
+          res.render("candidates");}
+          catch(err){console.log(err);}
 
       }
       else{res.render("Aaccount");}
 
     });
 
+    });
 
-});
 
 
 app.post("/login",async function(req,res)
